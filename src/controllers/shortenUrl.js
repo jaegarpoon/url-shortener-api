@@ -3,11 +3,10 @@ import { nanoid } from "nanoid";
 
 import pool from "../db/db.js";
 
-const baseUrl = "http://localhost:3000/";
-
 const shortenUrl = async (req, res) => {
   try {
     const { actualUrl } = req.body;
+    const baseUrl = req.protocol + "://" + req.get("host");
     if (!validUrl.isUri(actualUrl)) {
       return res.status(401).json("Invalid URL");
     }
@@ -16,7 +15,7 @@ const shortenUrl = async (req, res) => {
       actualUrl,
       shortenedHash,
     ]);
-    res.status(200).json(baseUrl + shortenedHash);
+    res.status(201).json(baseUrl + "/" + shortenedHash);
   } catch (err) {
     const duplicateUrl = await pool.query(
       `SELECT shortened_hash FROM url_table where actual_url='${req.body.actualUrl}';`
