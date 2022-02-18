@@ -20,7 +20,7 @@ const url_shortener_init = async () => {
   try {
     await pool.connect();
     pool.query(`CREATE TABLE IF NOT EXISTS url_table(
-      actual_url VARCHAR(128) PRIMARY KEY,
+      actual_url VARCHAR PRIMARY KEY,
       shortened_hash VARCHAR(32) UNIQUE NOT NULL
     );`);
     return true;
@@ -39,5 +39,5 @@ app.use("/", router);
 app.use("/url", router);
 app.use("/urls", router);
 
-const PORT = process.env.PORT || 3000;
+const PORT = 5000;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
