@@ -24,7 +24,7 @@ const shortenUrl = async (req, res) => {
       .status(500)
       .json(
         `Duplicate URL found, please visit ${
-          baseUrl + duplicateUrl.rows[0].shortened_hash
+          baseUrl + "/" + duplicateUrl.rows[0].shortened_hash
         }`
       );
   }
