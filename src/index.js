@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 import pool from "./db/db.js";
 import router from "./routes/routes.js";
@@ -7,6 +8,12 @@ import router from "./routes/routes.js";
 const app = express();
 
 app.use(bodyParser.json());
+
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 // Initialise API by creating url_table if it does not exist
 const url_shortener_init = async () => {

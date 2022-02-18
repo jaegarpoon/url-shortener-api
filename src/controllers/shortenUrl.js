@@ -4,11 +4,11 @@ import { nanoid } from "nanoid";
 import pool from "../db/db.js";
 
 const shortenUrl = async (req, res) => {
+  const baseUrl = req.protocol + "://" + req.get("host");
   try {
     const { actualUrl } = req.body;
-    const baseUrl = req.protocol + "://" + req.get("host");
     if (!validUrl.isUri(actualUrl)) {
-      return res.status(401).json("Invalid URL");
+      return res.status(500).json("Invalid URL");
     }
     const shortenedHash = nanoid(10);
     await pool.query("INSERT INTO url_table VALUES ($1, $2);", [
