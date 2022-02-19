@@ -8,7 +8,9 @@ const shortenUrl = async (req, res) => {
   try {
     const { actualUrl } = req.body;
     if (!validUrl.isUri(actualUrl)) {
-      return res.status(500).json({ body: "Invalid URL" });
+      return res
+        .status(500)
+        .json({ body: "Invalid URL. Try adding http:// or https://" });
     }
     const shortenedHash = nanoid(10);
     await pool.query("INSERT INTO url_table VALUES ($1, $2);", [
