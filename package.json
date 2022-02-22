@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --forceExit",
-    "start": "cross-env NODE_ENV=production node src/index.js"
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
